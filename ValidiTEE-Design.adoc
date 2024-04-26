@@ -1,0 +1,69 @@
+= ValidiTEE Design
+Sean Gilligan
+v0.0.2, April 26, 2023: Draft
+:numbered:
+
+[.metadata]
+{author} -- version {revnumber}, {revdate}
+
+== Introduction
+
+ValidiTEE is a project to create a portable, open-source implementation of
+a Validating Lightning Signer (VLS) service that runs inside a secure enclave. At its core it will consist of a Trusted Application (TA) that runs inside the enclave (TEE) as well as 2 or more client applications (CAs) that run under Linux, which is sometimes known as the Rich Execution Environment (REE)
+
+Since the core components require supporting firmware, kernel, and a client environment (linux packages) a developer's kit with installation instructions from source and binary will also be developed and released.
+
+Version 1.0 of ValidiTEE will be developed using the OP-TEE open source software/firmware. Hardware support and testing will initially be focused on Armv8-A systems (with TrustZone-A) but the architecture and implementation will be as portable as possible.
+
+== Core Requirements
+
+* Run VLS inside the secure enclave
+* Provide a connector/server to allow VLS to communicate with applications
+* Open source implementation
+* Open source software dependencies
+* Runs on off-the-shelf, open, standard, publicly-documented hardware
+* Secure Boot
+* Run on MPUs (aka application processors) on Single Board Computers
+* Use Global Platform APIs to ease porting to commercial TEEs and devices
+
+== Desirable Properties (Optional Requirements)
+
+* Binary blob-free firmware and kernel
+* Run on open or proprietary phones
+* Portable to SGX, AMD-TEE, RISC-V and/or other platforms or use cases
+* Secure element and/or resistance to physical attacks
+
+== Proposed Architecture
+
+=== Usage of ARM Processor Exception Levels
+
+The diagram below (TBD) shows the security architecture of an ArmV8-A system running with a TEE. Exception levels 0-3 are implemented in hardware for both the "Normal World" and the "Secure World". The ValidiTEE Trusted Application will run in Secure EL0 and is depicted as "Trusted App 1" in the diagram. In the normal world, running in Normal EL0 will be client applications (CAs) that communicate with the TA. In this diagram they are labelled "OP-TEE Client App".
+
+Note:: This diagram is TBD.
+
+=== Usage of Global Platform APIs
+
+In the below diagram **App / EL0** represents a ValidiTEE client application (CA) and the "TEE Client API" is the "GlobalPlatform TEE Client API" (GPD_SPE_007).  The **Trusted App / Secure-EL0** represents the ValidiTEE TA is the GlobalPlatform TEE Internal Core API (GPD_SPE_010). The specifications for these APIs are available in the  https://globalplatform.org/specs-library/[Global Platform Specification Library].
+
+These APIs are also supported by proprietary TEEs such as those provided by Samsung and Qualcomm. Usage of these APIs will enable the TA and CAs to be "easily" ported to the proprietary environments in commercial mobile phones.
+
+Note:: This diagram is TBD.
+
+== OP-TEE platform support
+
+The following is partial list of platforms supported by OP-TEE that are candidates for use in this project.
+
+* QEMU
+* Raspberry Pi 3
+* Raspberry Pi 4 (unofficial external repository)
+* https://pine64.com/product/pine-a64-lts/[Pine A64] (Allwinner A64)
+* https://rockpi.org/rockpi4[Rock Pi 4] (Rk3399)
+
+Note that the Raspberry Pi SoCs are only appropriate for software development/prototyping and lack the TrustZone hardware needed to create secure memory for the TEE.
+
+The complete list of
+https://optee.readthedocs.io/en/latest/general/platforms.html[OP-TEE supported platforms] is available on-line.
+
+== License
+
+This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License. For details, see LICENSE_DOC.

@@ -1,0 +1,78 @@
+= ValidiTEE Project Goals
+Sean Gilligan
+v0.0.2, April 26, 2023: Draft
+:numbered:
+
+[.metadata]
+{author} -- version {revnumber}, {revdate}
+
+
+== First Year Goals
+
+* A white-paper style report that describes the requirements and goals of the project, surveys the current landscape, compares alternatives for security and openness, and describes the overall strategy of the project. The paper will also make the case that other Bitcoin (and even other cryptocurrencies) can use the same technology. I will actively seek contributors and co-authors of the paper with experience and perspectives that I do not have. This paper will be circulated in the community for feedback and revision. It can also be used in conversations with hardware manufacturers.
+
+* A specification for the ValidiTEE TA and CA components
+
+* A system architecture document for the complete system including a "Threat Model" section and discussion of issue that must be addressed in production implementations.
+
+* An initial proof-of-concept that runs the signer TA inside simulated TrustZone-A hardware using QEMU that solves compile/link/library issues, can be used for measurement of memory and storage, etc.
+
+* One or two implementations running on (preferably widely available) reference hardware. Candidates are Raspberry Pi, Pine A64, Rock 4, or other systems from the OP-TEE "Platforms supported" list. (Note that Raspberry Pi does not provide a full implementation of TrustZone, but is well-documented and widely available so may be the best choice for initial, proof-of-concept hardware and for testing and evaluation beyond that.)
+
+* A VLS "server" CA application that receives requests from an external system (over a to-be-specified communications channel such as TCP/IP or USB)
+
+* Command-line administration and test tool Client Applications (CAs that run inthe REE) for ValidiTEE/VLS
+
+* A complete developer's kit with installation binaries and build-from-source instructions for both the secure boot *firmware* with the VLS TA _and_ a working Linux *kernel* and simple Linux *distro* containing the necessary REE components. The build process for the kernel will likely use Buildroot, but we may choose to use Yocto. (The reason I suggest using Raspberry Pi is that it will probably result in the greatest amount of testing, pull-request etc.)  This will include/require test installations on actual hardware that include burning public/private keys in secure OTP storage.
+
+* Unit tests and CI configuration
+
+* GitHub project, project website and other online documentation
+
+* A 1.0 (Beta) release of ValidiTEE that runs on the chosen hardware with the provided developer's kit.
+
+== Alternate or Stretch Goals
+
+Possible alternative goals (if we decide to change direction) or stretch goals if we make rapid progress on the main goals.
+
+* Add APIs and policies for signing Bitcoin transactions and using ECC/Schnorr directly
+* Integration with a secure element (e.g. NXP SE05X family)
+* Spin off the integrated firmware, kernel, and/or distro bundle as a separate project(s)
+* Android or Linux GUI apps for monitoring or configuring the TA
+* Android or Linux proof-of-concept GUI apps for user confirmation of transaction/commitment signing
+* Full security audit of the code (support external auditor)
+* AOSP (Android-flavored Linux) proof-of-concept or developer's kit
+* Proof-of-concept on a non-Linux REE OS
+* Proof-of-concept implementation on Linux cellphone (e.g. PinePhone Pro -- its RK 3399 SoC is supported by OP-TEE)
+* Work closely with a parallel hardware device project
+* Help define a minimal embedded Linux version suitable for some TBD use case
+* Create an alternative API for the GlobalPlatform CA and/or TA APIs.
+* Support an alternative processor architecture, e.g. Cortex-M, AMD-TEE, SGX, RISC V, etc.
+
+
+== Possible Upstream Contributions
+
+In the course of the project we may encounter deficiencies or limitations in Open Source software components that we will be using. If we find it necessary or desirable to resolve those issues it may be in our interest to submit fixes or improvements to the upstream projects.
+
+Possibilities include:
+
+* VLS
+** Modifications to support the ValidiTEE architecture, if necessary
+
+* libsecp256k1, BDK, LDK
+** ?, if necessary
+
+* Improvements to OP-TEE
+** Support for `libsecp256k1` as a core library or in a Pseudo TA (built-in TA)
+** Helping upstream the currently separate Raspberry Pi 4 implementation. (Currently, only Raspberry Pi 3 is tested and supported by OP-TEE core developers)
+** Helping upstream some to-be-discovered hardware that is suitable for our application
+
+* Improvements to Apache Teaclave TrustZone SDK (Support for use of Rust in OP-TEE)
+** ?, if necessary
+
+* Firmware/kernel/distro software
+** Ultimately we don't want to provide our own so if we can upstream necessary components into standard distributions of these components that might be helpful.
+
+== License
+
+This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License. For details, see LICENSE_DOC.
