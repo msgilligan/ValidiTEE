@@ -1,6 +1,6 @@
 = ValidiTEE Project ReadMe
 
-Welcome to the ValidTEE project. We are just getting started.
+Welcome to the ValidiTEE project. We are just getting started.
 
 We currently have two documents available:
 
