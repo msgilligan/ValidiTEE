@@ -9,7 +9,7 @@ v0.0.2, April 26, 2024: Draft
 == Introduction
 
 ValidiTEE is a project to create a portable, open-source implementation of
-a Validating Lightning Signer (VLS) service that runs inside a secure enclave. At its core it will consist of a Trusted Application (TA) that runs inside the enclave (TEE) as well as 2 or more client applications (CAs) that run under Linux, which is sometimes known as the Rich Execution Environment (REE)
+a https://vls.tech[Validating Lightning Signer] (VLS) service that runs inside a secure enclave. At its core it will consist of a Trusted Application (TA) that runs inside the enclave (TEE) as well as 2 or more client applications (CAs) that run under Linux, which is sometimes known as the Rich Execution Environment (REE)
 
 Since the core components require supporting firmware, kernel, and a client environment (linux packages) a developer's kit with installation instructions from source and binary will also be developed and released.
 
