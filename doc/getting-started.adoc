@@ -40,6 +40,14 @@ Configure for QEMU v8.
 . `repo init -u https://github.com/OP-TEE/manifest.git -m qemu_v8.xml -b 4.2.0`
 . `repo sync -j4 --no-clone-bundle`
 
+=== Get the Toolchains
+
+. `cd build`
+. `make -j2 toolchains`
+
+=== Build OP-TEE
+
+. `make -j `nproc``
 
 
 
