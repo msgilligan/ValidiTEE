@@ -1,0 +1,28 @@
+block-beta
+columns 7
+block:client:4
+columns 4
+  app["Rust CLI App"]:3
+ block:appclnt:1
+      columns 1
+      clientAPI["TEE Client API"]
+      otclient["OP-TEE Client"]
+    end
+  end
+ta["secp256k1 Blind-signer TA"]:3
+
+space
+blockArrowId1<["IOCTL"]>(y):2 space:2
+blockArrowId2<["OP-TEE Protocol"]>(y) space:1
+
+block:kernel[" "]:4
+    columns 1
+     Linux["Linux Kernel"]
+    todriver["OP-TEE Driver"]
+end
+teeos["OP-TEE OS"]:3
+
+    blockArrowId3<["OP-TEE Protocol / SMC"]>(y):4
+    blockArrowId4<["OP-TEE Protocol / SMC"]>(y):3
+
+SMC["Secure Monitor (Firmware)"]:7

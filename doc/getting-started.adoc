@@ -1,0 +1,51 @@
+= Getting Started (WIP/DRAFT Version)
+
+How to setup the OP-TEE development environment for this project.
+
+== Prerequisites
+
+Although OP-TEE recommends using Ubuntu (22.04), for this project we prefer Debian 12 and have verified that our build works correctly on Debian 12.
+
+== Setting up the OP-TEE Development Environment
+
+The easiest way to setup an OP-TEE development environment is to check out the https://github.com/OP-TEE/build[OP-TEE/build] repository and follow the https://optee.readthedocs.io/en/latest/building/gits/build.html#[OP-TEE build instructions] that use the https://source.android.com/docs/setup/download[repo] command from the https://source.android.com/[AOSP] project. The instructions here are meant to supplement those instructions.
+
+NOTE:: These instructions assume you have installed the Nix package manager to supplement Debian's built-in `apt-install`.  [A full Nix-based build would be nice, but is not in the current scope of this project.]
+
+=== Installing necessary APT packages
+
+. `./scripts/install-optee-prereqs.sh`
+
+=== Installing Nix
+
+See https://www.hillenius.net/post/debian-nix-ii/[Updated First Steps With Nix on Debian] for recommended instructions on installing Nix under Debian. You also need to add the following line to `/etc/nix/nix.conf`:
+
+[source]
+----
+experimental-features = nix-command flakes
+----
+
+=== Installing Nix Packages
+
+For now, we are assuming you are using `nix profile install`.
+
+. `nix profile install nixpkgs#git-repo`  # To install the AOSP `repo` tool
+
+=== Get the Source Code
+
+Configure for QEMU v8.
+
+. `mkdir -p optee-qemu8`
+. `cd optee-qemu8`
+. `repo init -u https://github.com/OP-TEE/manifest.git -m qemu_v8.xml -b 4.2.0`
+. `repo sync -j4 --no-clone-bundle`
+
+
+
+
+
+
+
+
+
+
