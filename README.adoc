@@ -8,3 +8,8 @@ We currently have two documents available:
 * link:ValidiTEE-Goals.adoc[ValidiTEE Project Goals]
 
 Stay tuned!
+
+Draft documents:
+
+* link:doc/overall-architecture.mmd[Architecture Diagram]
+* link:doc/getting-started.adoc[Getting Started]
