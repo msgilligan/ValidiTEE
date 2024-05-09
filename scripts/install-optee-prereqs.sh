@@ -36,7 +36,7 @@ sudo apt install -y \
     libusb-1.0-0-dev \
     make \
     mtools \
-    netcat \
+    netcat-openbsd \
     ninja-build \
     python3-cryptography \
     python3-pip \
