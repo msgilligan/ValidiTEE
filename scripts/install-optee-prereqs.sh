@@ -1,5 +1,14 @@
 #/bin/sh
 # Install OP-TEE prerequisites on Debian 12 with APT
+# Will install cross-compiler if host architecture is not "aarch64"
+ARCH=`arch`
+# Set GCC64 based on the architecture
+if [ "$ARCH" == "aarch64" ]; then
+    GCC64="gcc"
+else
+    GCC64="gcc-aarch64-linux-gnu"
+fi
+
 sudo apt install -y \
     adb \
     acpica-tools \
@@ -51,4 +60,6 @@ sudo apt install -y \
     xdg-utils \
     xterm \
     xz-utils \
-    zlib1g-dev
+    zlib1g-dev \
+    $GCC64 \
+    gcc-arm-linux-gnueabihf
