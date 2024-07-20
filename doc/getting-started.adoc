@@ -1,6 +1,6 @@
 = Getting Started (WIP/DRAFT Version)
 
-How to setup the OP-TEE development environment for this project.
+How to set up the OP-TEE development environment for this project.
 
 == Prerequisites
 
@@ -35,21 +35,40 @@ For now, we are assuming you are using `nix profile install`.
 
 Configure for QEMU v8.
 
+If you haven't done it already:
+
+```
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+```
+
+then:
+
 . `mkdir -p optee-qemu8`
 . `cd optee-qemu8`
-. `repo init -u https://github.com/OP-TEE/manifest.git -m qemu_v8.xml -b 4.2.0`
-. `repo sync -j4 --no-clone-bundle`
+. `repo init -u https://github.com/OP-TEE/manifest.git -m qemu_v8.xml`
+. `repo sync`
 
 === Get the Toolchains
 
 . `cd build`
 . `make -j2 toolchains`
 
+
+// This is not used anymore
+// Read the message about "To get started you need Cargo's bin directory ... in your PATH environment variable" and run the command to set PATH
+
+//. `. "$HOME/optee-qemu8/build/../toolchains/rust/.cargo/env"`
+
 === Build OP-TEE
 
-. `make -j `nproc``
+. `make -j$(nproc) RUST_ENABLE=n check`
 
+The `check` target will start QEMU and run tests.
 
+NOTE:: `RUST_ENABLE=n` is a workaround for a build issue that occurs on ARM hosts. It is not needed on AMD64 systems and the current build sets `RUST_ENABLE` to `no` by default on ARM64.
+
+=== Mounting shared dir inside QEMU
 
 
 
