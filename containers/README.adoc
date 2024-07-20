@@ -1,0 +1,22 @@
+= ValidTEE Container Build Instructions
+
+== Setup
+
+. Make sure you have Docker or Podman correctly installed.
+
+
+== Build the Container Image for Compiling TAs.
+
+Due to a bug in the OP-TEE build, if you are on a ARM64 host, you will need to use an AMD64 container
+to build the TA.
+
+To build a container image that can build the Rust TA and client apps, run:
+
+. `./make-builder-image.sh`
+
+Note that this script forces the container engine to use an AMD64 container, so the build
+will be relatively slow on your ARM64 machine. Fortunately, there is a lot less building going on
+when you build your TA and CA.
+
+== Build your TA and CA with the builder image.
+
